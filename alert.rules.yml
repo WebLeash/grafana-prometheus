@@ -1,0 +1,11 @@
+groups:
+- name: http_requests_alerts
+  rules:
+  - alert: HighHTTPRequests
+    expr: sum(rate(http_request_latency_seconds_count[5m])) > 0.3
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High HTTP request rate"
+      description: "The rate of HTTP requests is above 0.3 for more than 1 minute."
